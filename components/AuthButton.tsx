@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import RegisterPasskeyButton from "./register-passkey-button";
 
 export default async function AuthButton() {
   const cookieStore = cookies();
@@ -10,6 +11,12 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  console.log(session)
 
   const signOut = async () => {
     "use server";
@@ -28,6 +35,7 @@ export default async function AuthButton() {
           Logout
         </button>
       </form>
+      <RegisterPasskeyButton />
     </div>
   ) : (
     <Link
