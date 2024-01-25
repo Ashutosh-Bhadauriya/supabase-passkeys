@@ -14,9 +14,10 @@ export default function SignInWithPasskey() {
         if (!response || !response.token) {
             return null;
         }
-        const {token} = response;
+        const { token } = response;
         const userID = await getUserID(token);
         console.log(userID);
+
     }
     return (
         <button onClick={signIn} className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
